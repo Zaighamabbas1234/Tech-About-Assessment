@@ -42,7 +42,8 @@ The article dataset was designed to contain the following fields:
 | `format`              | Article format                            |
 | `names_a_company`     | Whether a company or named entity appears |
 | `contains_a_number`   | Whether the headline contains a number    |
-The collection process followed the assessment's request-rate limitation of **one request every two seconds**.
+
+> The collection process followed the assessment's request-rate limitation of **one request every two seconds**.
 # Analysis Workflow:
 ```text
 Article Collection.
