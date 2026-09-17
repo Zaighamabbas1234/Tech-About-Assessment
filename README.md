@@ -118,3 +118,7 @@ This assessment strengthened my practical experience in:
 * Year-over-year performance analysis.
 * Communicating technical findings to stakeholders.
 * Working with real-world data limitations.
+
+If you find this repository useful for learning SQL, feel free to **star ⭐ the repository** and explore the examples.
+---
+**Thank you for visiting this repository!**
