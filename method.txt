@@ -1,0 +1,38 @@
+METHOD (reproducible)
+
+Part 1 - techi_articles.csv
+Source: live pages at https://www.techi.com/category/<slug>/ (page 1 only),
+fetched 2026-08-31. Slugs used: ai-intelligence, markets-equities,
+crypto-defi, tech-breakthroughs, policy-impact, research-tools-guides
+(these are the real slugs behind the site's "AI", "Markets", "Crypto",
+"Breakthroughs", "Policy", "Guides" nav labels). For each section, the 20
+most recent article cards on page 1 were taken in the order shown (site
+already sorts newest-first); one non-article "live market board" widget on
+the Crypto page was skipped. Fields taken directly from the page: url,
+section, headline, author, date_shown (verbatim). No login, no pagination
+past page 1, single sequential fetches (well under 1 req/2s).
+
+Three fields are NOT on the site and are computed, not scraped:
+- headline_word_count: whitespace split of the headline string.
+- contains_a_number: regex \d anywhere in the headline.
+- names_a_company: headline contains a whole-word match against a fixed
+  ~65-name list of companies/tickers seen in this sample (Nvidia, Tesla,
+  Google, etc.) - a judgment call, not a site field.
+- format: Guides section -> "Guide" always. Other sections -> "Explainer"
+  if the headline matches a definitional pattern (e.g. starts "What Is",
+  contains "Field Guide"/"Checklist"); "Analysis" if it contains an
+  interpretive marker (e.g. "isn't", "the real", "test", "catch", or
+  starts "Why "); else "News". Exact patterns are in build_csv.py. This is
+  the analyst's classification, not a TECHi field - treat as a judgment
+  call, not ground truth.
+
+14 of the 120 sampled urls appear twice (cross-listed on two category
+pages) - a real site behavior, not a scraping error.
+
+Part 2 - traffic_data_invented.csv
+The 12-month sessions/signup table is the invented data supplied in the
+brief, transcribed as given and kept in its own file/sheet, never merged
+with Part 1.
+
+Reproduce: python3 build_csv.py && python3 traffic_analysis.py &&
+python3 analysis.py (pandas, matplotlib, openpyxl; no other dependencies).
